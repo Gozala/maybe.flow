@@ -110,7 +110,7 @@ Turns arbitrary `value` of type `a` into `Maybe<a>`. Not that in most cases you 
 Maybe.just(4) // => 4
 ```
 
-### `nothing:Maybe<any>`
+### `nothing:Maybe<*>`
 
 This is just an exported `null` and you can use `null`, or `undefined` or `null|undefined|void|a` in place for `Maybe<a>` but sometimes code will read and communiacte intent a lot better when you do use explicit names.
 
