@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "0.1.0",
   "name": "maybe.flow",
   "description": "Library for representing values that may or may not exist",
   "keywords": ["maybe.flow", "typed", "flow"],
