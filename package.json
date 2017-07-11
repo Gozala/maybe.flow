@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "name": "maybe.flow",
   "description": "Library for representing values that may or may not exist",
   "keywords": ["maybe.flow", "typed", "flow"],
@@ -25,13 +25,14 @@
     "test:tape": "blue-tape -r babel-register test/**/*.js",
     "test:flow": "flow check",
     "build:clear": "rm -rf lib",
-    "build:types": "flow-copy-source -v src lib",
+    "build:types": "flow-copy-source --verbose src lib",
     "build:node": "babel --out-dir lib src",
     "build:api": "documentation readme --section=API src/Maybe.js",
     "build:docs": "documentation build --document-exported src/** -f html --o docs",
     "build": "npm run build:node && npm run build:types",
     "prepublish": "npm run build && npm test",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "start": "flow-copy-source --watch --verbose src lib & babel --watch --out-dir lib src"
   },
   "lint-staged": {
     "*.js": ["prettier --parser flow --no-semi --write", "git add"]
