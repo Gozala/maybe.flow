@@ -33,7 +33,7 @@ export const just = <a>(value: a): Maybe<a> => value
 /**
  * Just provides an alias to `null`.
  */
-export const nothing: Maybe<*> = null
+export const nothing = null
 
 /**
  * Provide a `fallback` value, turning an optional value into a normal value.
