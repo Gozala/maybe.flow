@@ -58,8 +58,10 @@ export const toValue = <a>(fallback: a, maybe: Maybe<a>): a =>
  * @param f Function that maps underlayng value.
  * @param maybe Maybe value to be transformed.
  */
-export const map = <a, b>(f: (input: a) => b, maybe: Maybe<a>): Maybe<b> =>
-  maybe == null ? null : f(maybe)
+export const map = <a, b>(
+  f: (input: $NonMaybeType<a>) => b,
+  maybe: Maybe<a>
+): Maybe<b> => (maybe == null ? null : f(maybe))
 
 /**
  * Utility to chain together two computations that may fail (return Nothing).
@@ -80,7 +82,7 @@ export const map = <a, b>(f: (input: a) => b, maybe: Maybe<a>): Maybe<b> =>
  * @param maybe Maybe value, representing result of first computation.
  */
 export const chain = <a, b>(
-  then: (input: a) => Maybe<b>,
+  then: (input: $NonMaybeType<a>) => Maybe<b>,
   maybe: Maybe<a>
 ): Maybe<b> => (maybe == null ? null : then(maybe))
 
