@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as Maybe from ".."
+import { tail, list } from "./List"
 import test from "blue-tape"
 
 test("test exports", async test => {
@@ -37,26 +38,6 @@ test("test Maybe.map", async test => {
 })
 
 test("test Maybe.chain", async test => {
-  class List<a> {
-    head: a
-    tail: Maybe.Maybe<List<a>>
-    static singleton(head: a): List<a> {
-      return new List(head, Maybe.nothing)
-    }
-    constructor(head: a, tail: Maybe.Maybe<List<a>>) {
-      this.head = head
-      this.tail = tail
-    }
-  }
-
-  const list = <a>(...items: Array<a>): List<a> =>
-    items.reduceRight(
-      (tail, head) => new List(head, tail),
-      List.singleton(items.pop())
-    )
-
-  const tail = <a>(list: List<a>): Maybe.Maybe<List<a>> => list.tail
-
   test.deepEqual(Maybe.chain(tail, Maybe.just(list(1, 2))), list(2))
   test.deepEqual(Maybe.chain(tail, list(1, 2)), list(2))
   test.deepEqual(Maybe.chain(tail, list(1)), Maybe.nothing)
