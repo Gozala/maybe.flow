@@ -88,4 +88,43 @@ test("test Maybe.or", async test => {
   test.equal(Maybe.or(Maybe.nothing, Maybe.nothing), Maybe.nothing)
 })
 
+test("issue#4", async test => {
+  type Params = {
+    age: number
+  }
+
+  type User = {
+    name: string,
+    params: Maybe.Maybe<Params>
+  }
+
+  {
+    const user: User = { name: "Soname", params: { age: 99 } }
+
+    const params = Maybe.chain(v => v.params, Maybe.just(user)) // params:Maybe<Params>
+
+    const age = Maybe.map(v => v.age, params) // age:Maybe<number>
+
+    test.equal(age, 99, "age is as expected")
+  }
+
+  {
+    const params = Maybe.chain(v => v.params, Maybe.nothing) // params:Maybe<Params>
+
+    const age = Maybe.map(v => v.age, params) // age:Maybe<number>
+
+    test.equal(age, Maybe.nothing, "age is Maybe.nothing")
+  }
+
+  {
+    const user: User = { name: "Soname", params: null }
+
+    const params = Maybe.chain(v => v.params, Maybe.just(user)) // params:Maybe<Params>
+
+    const age = Maybe.map(v => v.age, params) // age:Maybe<number>
+
+    test.equal(age, Maybe.nothing, "age is Maybe.nothing")
+  }
+})
+
 const isFunction = <a>(value: a): boolean => typeof value === "function"
