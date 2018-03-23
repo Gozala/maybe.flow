@@ -23,7 +23,7 @@ Given javascript / typescript semantics `Nothing` is just a type alias for union
 of primitives representing absence of value:
 
 ```ts
-type Nothing = null | undefiend | void
+type Nothing = null | undefined | void
 ```
 
 For the same reason `Just<a>` is just a type alias for `a`:
